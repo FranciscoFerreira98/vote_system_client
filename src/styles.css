@@ -1,0 +1,117 @@
+body.dark-mode {
+  background-color: #0d1117;
+  color: #ffffff;
+}
+
+body.light-mode {
+  background-color: #ffffff;
+  color: #0d1117;
+}
+
+.text-dark.light-mode {
+  color: #181c32 !important;
+}
+
+.text-dark.dark-mode {
+  color: #ffffff !important;
+}
+
+body:not(.dark-mode-preloading) {
+  transition: all 0.3s linear;
+}
+
+
+.login {
+  color: #20d489 !important;
+}
+
+.logout {
+  color: #7e8299;
+}
+
+
+.imgCreate {
+  width: 30%;
+}
+
+
+.marTop18 {
+  margin-top: 18%;
+}
+
+
+.marTop14 {
+  margin-top: 14%;
+}
+
+.marTop10 {
+  margin-top: 10%;
+}
+
+.marTop8 {
+  margin-top: 8%;
+}
+
+.marNavLeft {
+  margin-left: 18px;
+}
+
+.paddingTopContent {
+  padding-top: 30px;
+}
+
+.width100 {
+  width: 100%;
+}
+
+footer {
+  clear: both;
+  position: relative;
+  height: 200px;
+  margin-top: -200px;
+}
+
+.submitBtn {
+  display: none;
+}
+
+.ngx-pagination {
+  margin-right: .5rem !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  border-radius: .65rem !important;
+  height: 2.5rem !important;
+  min-width: 2.5rem !important;
+  font-weight: 500 !important;
+  font-size: 1.075rem !important;
+}
+
+.ngx-pagination .current,
+.btn-info {
+  z-index: 3;
+  color: #fff;
+  background-color: #20d489;
+  border-color: transparent;
+  border-radius: .65rem !important;
+}
+
+.ngx-pagination .current:hover {
+  z-index: 3 !important;
+  color: #fff !important;
+  background-color: #20d489 !important;
+  border-color: transparent;
+  border-radius: .65rem !important;
+}
+
+.ngx-pagination .current {
+  z-index: 3;
+  color: #fff !important;
+  background-color: #20d489 !important;
+  border-color: transparent !important;
+  border-radius: .65rem !important;
+}
+
+.marginLeftEdit {
+  margin-left: 8px !important;
+}

@@ -1,0 +1,121 @@
+<div *ngIf="showVote && !submitedVote">
+  <div class="card shadow-sm">
+    <div class="card card-flush shadow-sm">
+      <div class="card-header">
+        <h3 class="card-title">Boletim de voto - {{currentPoll.name}}</h3>
+        <div class="card-toolbar">
+
+        </div>
+      </div>
+      <div class="card-body py-5">
+        <form (ngSubmit)="onSubmit()">
+          <table id="kt_datatable_example_1" class="table align-middle table-row-dashed fs-6 gy-5">
+            <thead>
+              <tr class="fw-bold fs-6 text-gray-800">
+                <th>Nome</th>
+                <th>Número de aluno</th>
+                <th class="min-w-100px sorting_disabled">Votar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let repre of allRepresentatives">
+                <td>{{repre.name}}</td>
+                <td>{{repre.num_student}}</td>
+                <td class=" text-end">
+
+                  <div class="form-check form-check-custom form-check-solid">
+                    <!--  <input data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end" class="form-check-input"
+                      type="checkbox" (ngModel)="checkBox.getCheckedVote" value="{{repre.id}}" id="flexCheckDefault" name="{{repre.name}}" /> -->
+                    <input class="form-check-input" (change)="isAllSelected(repre)"  [checked]="repre.isSelected"   [id]="repre.id" type="checkbox" name="{{repre.num_student}}"
+                      value="{{repre.id}}">
+                      
+                    
+                  </div>
+                  <!--end::Menu-->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <button class="btn btn-primary width100" [swal]="{  html: 'Deseja confirmar o voto?' ,  buttonsStyling: false, title: 'Confirmar o voto', icon: 'warning', showCancelButton: true, denyButtonText: 'Cancelar',  customClass: {
+              confirmButton: 'btn btn-primary',
+              cancelButton: 'btn btn-light-danger'
+          }}" (confirm)="onSubmit()">
+
+
+            <span class="indicator-label">Submeter o voto
+              <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
+              <span class="svg-icon svg-icon-3 ms-2 me-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)"
+                    fill="black"></rect>
+                  <path
+                    d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
+                    fill="black"></path>
+                </svg>
+              </span>
+            </span>
+          </button>
+
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="submitedVote && !showVote">
+  <div class="d-flex flex-column flex-root">
+    <!--begin::Error-->
+    <div class="d-flex flex-column flex-column-fluid position-relative">
+      <!--begin::Background-->
+      <div
+        class="bgi-size-contain bgi-position-x-end bgi-position-y-bottom bgi-no-repeat position-absolute top-0 start-0 w-100 h-100">
+      </div>
+      <!--end::Background-->
+      <!--begin::Content-->
+      <div class="px-10 px-md-20 pt-10 pt-md-14 z-index-1">
+        <a href="/start-html-pro/index.html">
+          <img alt="Logo" src="../../assets/img/logo.svg" class="h-75px">
+        </a>
+      </div>
+      <div
+        class="px-10 px-md-20 py-10 py-md-0 d-flex flex-column justify-content-md-center align-items-start flex-root w-md-700px z-index-1">
+        <p class="display-6 fw-bolder text-gray-800 mb-8">O teu voto já foi registado</p>
+        <p class="fs-6 mb-8">Graças a teu voto já poupamos juntos x arvores.</p>
+
+
+        <a href="/home" class="btn btn-primary fs-6 fw-bolder py-4 px-6 me-auto">Voltar para a pagina inicial</a>
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Error-->
+  </div>
+</div>
+
+<div *ngIf="!showVote && !submitedVote ">
+  <div class="d-flex flex-column flex-root">
+    <!--begin::Error-->
+    <div class="d-flex flex-column flex-column-fluid position-relative">
+      <!--begin::Background-->
+      <div
+        class="bgi-size-contain bgi-position-x-end bgi-position-y-bottom bgi-no-repeat position-absolute top-0 start-0 w-100 h-100">
+      </div>
+      <!--end::Background-->
+      <!--begin::Content-->
+      <div class="px-10 px-md-20 pt-10 pt-md-14 z-index-1">
+        <a href="/start-html-pro/index.html">
+          <img alt="Logo" src="../../assets/img/logo.svg" class="h-75px">
+        </a>
+      </div>
+      <div
+        class="px-10 px-md-20 py-10 py-md-0 d-flex flex-column justify-content-md-center align-items-start flex-root w-md-700px z-index-1">
+        <p class="display-6 fw-bolder text-gray-800 mb-8">Algo está errado</p>
+        <p class="fs-6 mb-8">Não existe essa chave de voto, verifique novamente a chave.</p>
+        <a href="/home" class="btn btn-primary fs-6 fw-bolder py-4 px-6 me-auto">Voltar para a pagina inicial</a>
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Error-->
+  </div>
+
+</div>

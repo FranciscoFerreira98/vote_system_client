@@ -1,0 +1,255 @@
+<div class="d-flex">
+  <div class="d-flex flex-column align-items-start justify-content-center flex-wrap me-1">
+    <!--begin::Title-->
+    <h3 class="text-dark fw-bolder my-1">Votação</h3>
+    <!--end::Title-->
+    <!--begin::Breadcrumb-->
+    <ul class="breadcrumb breadcrumb-line bg-transparent text-muted fw-bold p-0 my-1 fs-7">
+      <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Home</a>
+      </li>
+      <li class="breadcrumb-item"> <a class="text-muted text-hover-primary" href="/mesa"> Dashboard </a></li>
+      <li class="breadcrumb-item text-dark">Votação</li>
+    </ul>
+    <!--end::Breadcrumb-->
+  </div>
+</div>
+<br>
+<br>
+<div *ngIf="!isFinished">
+  <div *ngIf="isUpdated">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card card-flush shadow-sm">
+          <div class="card-header">
+            <h3 class="card-title">{{currentPoll.name}}</h3>
+            <div class="card-toolbar">
+              <button type="button" (click)="sendEmail()" class="btn btn-light-primary">
+                Enviar emails
+              </button>
+              <button type="button" (click)="deletePoll()" class="btn btn-light-danger marginLeftEdit">
+                Apagar
+              </button>
+            </div>
+          </div>
+          <div class="card-body py-5">
+            <p>Data de inicio: {{currentPoll.start_date | date:'medium'}}</p>
+            <p>Data final: {{currentPoll.end_date | date:'medium'}}</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="card shadow-sm">
+          <div class="card card-flush shadow-sm">
+            <div class="card-header">
+              <h3 class="card-title">Lista de eleitores</h3>
+              <div class="card-toolbar">
+
+              </div>
+            </div>
+            <div class="card-body py-5">
+              <div>
+                <div class="d-flex flex-stack mb-5">
+                  <!--begin::Search-->
+                  <div class="d-flex align-items-center position-relative my-1">
+                    <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                    <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
+                          transform="rotate(45 17.0365 15.1223)" fill="black"></rect>
+                        <path
+                          d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+                          fill="black"></path>
+                      </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                    <input [(ngModel)]="name" (keyup.enter)="onEnter()" type="text" data-kt-docs-table-filter="search"
+                      class="form-control form-control-solid w-250px ps-15" placeholder="Procurar por aluno">
+                  </div>
+                  <!--end::Search-->
+                  <!--begin::Toolbar-->
+                  <div class="d-flex justify-content-end" data-kt-docs-table-toolbar="base">
+                    <!--begin::Filter-->
+
+                    <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" title=""
+                      data-bs-original-title="Coming Soon">
+                      <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                      <span class="svg-icon svg-icon-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                          <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1"
+                            transform="rotate(-90 11.364 20.364)" fill="black"></rect>
+                          <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"></rect>
+                        </svg>
+                      </span>
+                      <!--end::Svg Icon-->Adicionar aluno</button>
+                    <!--end::Add customer-->
+                  </div>
+                  <!--end::Toolbar-->
+                  <!--begin::Group actions-->
+                  <div class="d-flex justify-content-end align-items-center d-none"
+                    data-kt-docs-table-toolbar="selected">
+                    <div class="fw-bolder me-5">
+                      <span class="me-2" data-kt-docs-table-select="selected_count"></span>Selected</div>
+                    <button type="button" class="btn btn-danger" data-kt-docs-table-select="delete_selected">Selection
+                      Action</button>
+                  </div>
+                  <!--end::Group actions-->
+                </div>
+              </div>
+              <table id="kt_datatable_example_1" class="table align-middle table-row-dashed fs-6 gy-5">
+                <thead>
+                  <tr class="fw-bold fs-6 text-gray-800">
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Número de aluno</th>
+                    <th class="text-end min-w-100px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions">Ação
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let voter of voters | paginate : {
+                itemsPerPage: 5, currentPage: p1,  id: 'voters'
+              }">
+                    <td>{{voter.name}}</td>
+                    <td>{{voter.email}}</td>
+                    <td>{{voter.num_student}}</td>
+                    <td class=" text-end">
+                      <button href="#" class="btn btn-light-danger" (click)="deleteVoter(voter.id)">
+                        Apagar
+
+                      </button>
+
+                      <!--end::Menu-->
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <pagination-controls class="pagination" previousLabel="Prev" nextLabel="Next" [responsive]="true"
+                (pageChange)="p1 = $event" id="voters">"></pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="card shadow-sm">
+          <div class="card card-flush shadow-sm">
+            <div class="card-header">
+              <h3 class="card-title">Lista de representantes</h3>
+              <div class="card-toolbar">
+
+              </div>
+            </div>
+            <div class="card-body py-5">
+              <div>
+                <div class="d-flex flex-stack mb-5">
+                  <!--begin::Search-->
+                  <div class="d-flex align-items-center position-relative my-1">
+                    <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                    <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
+                          transform="rotate(45 17.0365 15.1223)" fill="black"></rect>
+                        <path
+                          d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+                          fill="black"></path>
+                      </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                    <input [(ngModel)]="nameRepresent" (keyup.enter)="onEnter()" type="text"
+                      data-kt-docs-table-filter="search" class="form-control form-control-solid w-250px ps-15"
+                      placeholder="Procurar por aluno">
+                  </div>
+                  <!--end::Search-->
+                  <!--begin::Toolbar-->
+                  <div class="d-flex justify-content-end" data-kt-docs-table-toolbar="base">
+                    <!--begin::Filter-->
+
+                    <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" title=""
+                      data-bs-original-title="Coming Soon">
+                      <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                      <span class="svg-icon svg-icon-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                          <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1"
+                            transform="rotate(-90 11.364 20.364)" fill="black"></rect>
+                          <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"></rect>
+                        </svg>
+                      </span>
+                      <!--end::Svg Icon-->Adicionar aluno</button>
+                    <!--end::Add customer-->
+                  </div>
+                  <!--end::Toolbar-->
+                  <!--begin::Group actions-->
+                  <div class="d-flex justify-content-end align-items-center d-none"
+                    data-kt-docs-table-toolbar="selected">
+                    <div class="fw-bolder me-5">
+                      <span class="me-2" data-kt-docs-table-select="selected_count"></span>Selected</div>
+                    <button type="button" class="btn btn-danger" data-kt-docs-table-select="delete_selected">Selection
+                      Action</button>
+                  </div>
+                  <!--end::Group actions-->
+                </div>
+              </div>
+              <table id="kt_datatable_example_1" class="table align-middle table-row-dashed fs-6 gy-5">
+                <thead>
+                  <tr class="fw-bold fs-6 text-gray-800">
+                    <th>Nome</th>
+                    <th>Número de aluno</th>
+                    <th class="text-end min-w-100px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions">Ação
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let repre of allRepresentatives | paginate : {
+                itemsPerPage: 5, currentPage: p, id: 'allRepresentatives'
+              }">
+                    <td>{{repre.name}}</td>
+                    <td>{{repre.num_student}}</td>
+                    <td class=" text-end">
+                      <button href="#" class="btn btn-light-danger" (click)="deleteRepresent(repre.id)">
+                        Apagar
+
+                      </button>
+
+                      <!--end::Menu-->
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <pagination-controls class="pagination" previousLabel="Prev" nextLabel="Next" [responsive]="true"
+                (pageChange)="p = $event" id="allRepresentatives"></pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!isUpdated">
+    <div class="row">
+      <img src="../../assets/img/logo.svg" class="imgCreate">
+      <br>
+      <h1>A votação ja começou não pode edita-la</h1>
+      <h4>Agredecemos a compreensão</h4>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card card-flush shadow-sm">
+          <div class="card-header">
+            <h3 class="card-title">{{currentPoll.name}}</h3>
+
+          </div>
+          <div class="card-body py-5">
+            <p>Data de inicio: {{currentPoll.start_date | date:'medium'}}</p>
+            <p>Data final: {{currentPoll.end_date | date:'medium'}}</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
