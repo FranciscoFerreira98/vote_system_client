@@ -9,7 +9,6 @@ import { FileUploadService } from 'src/app/_services/file-upload.service';
 import {FileUploadRepresentativeService } from '../_services/file-upload-representatives.service';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import flatpickr from 'flatpickr';
-import { any } from 'sequelize/types/lib/operators';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 
 export function flatpickrFactory() {
