@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FileUploadRepresentativeService } from '../_services/file-upload-representatives.service';
 import { CountVotesService } from '../_services/count-votes.service';
 import { EmailService } from '../_services/email.service';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-poll',
@@ -27,7 +27,9 @@ export class EditPollComponent implements OnInit {
   today = new Date();
   isFinished = false;
   isUpdated = false;
-
+  studentName: any;
+  modalNum_student: any;
+  modalEmail : any;
   vote: any;
   numberOfVotes: any;
 
@@ -41,8 +43,9 @@ export class EditPollComponent implements OnInit {
     private representativeService: FileUploadRepresentativeService,
     private route: ActivatedRoute,
     private countVotes: CountVotesService,
-    private email : EmailService
-  ) {}
+    private email: EmailService,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit(): void {
     this.getPoll(this.route.snapshot.paramMap.get('id'));
@@ -160,6 +163,7 @@ export class EditPollComponent implements OnInit {
   deleteVoter(id) {
     this.votersService.delete(id).subscribe(
       (response) => {
+        this.toastr.error('Eleitor removido');
         this.searchByName();
       },
       (error) => {
@@ -171,6 +175,7 @@ export class EditPollComponent implements OnInit {
   deleteRepresent(id) {
     this.representativeService.delete(id).subscribe(
       (response) => {
+        this.toastr.error('Representante removido');
         this.searchByNameRepresents();
       },
       (error) => {
@@ -221,20 +226,21 @@ export class EditPollComponent implements OnInit {
     );
   }
 
-  sendEmail(){
+  sendEmail() {
 
     for (let i = 0; i < this.voters.length; i++) {
       const data = {
-        to : this.voters[i].email,
-        name : this.voters[i].name,
-        md5 : this.voters[i].md5,
-        title : this.currentPoll.name
+        to: this.voters[i].email,
+        name: this.voters[i].name,
+        md5: this.voters[i].md5,
+        title: this.currentPoll.name
       }
 
       console.log(data);
-      
+
       this.email.send(data).subscribe(
         (response) => {
+          this.toastr.success('Emails enviados com sucesso');
           console.log(response);
         },
         (error) => {
@@ -243,4 +249,66 @@ export class EditPollComponent implements OnInit {
       );
     }
   }
+
+  sendEmailToStudent(email, name) {
+
+    for (let i = 0; i < this.voters.length; i++) {
+      if (this.voters[i].email == email) {
+        const data = {
+          to: email,
+          name: name,
+          md5: this.voters[i].md5,
+          title: this.currentPoll.name
+        }
+        console.log(data);
+        
+     this.email.send(data).subscribe(
+       (response) => {
+        this.toastr.success('Email enviado com sucesso');
+         console.log(response);
+       },
+       (error) => {
+         console.log(error);
+       });
+      }
+    }
+  }
+
+  addStudent(){
+    const student = {
+      name: this.studentName,
+      email: this.modalEmail,
+      num_students: this.modalNum_student,
+      pollId: this.currentPoll.id
+    }
+    console.log(student);
+    this.votersService.create(student).subscribe(
+      (response) => {  
+        this.toastr.success('Aluno adicionado com sucesso');
+        this.searchByName();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+  addStudentRepresentative(){
+    const student = {
+      name: this.studentName,
+      num_student: this.modalNum_student,
+      pollQuestionId: 1,
+      pollId: this.currentPoll.id
+    }
+    console.log(student);
+    this.representativeService.create(student).subscribe(
+      (response) => {  
+        this.toastr.success('Aluno adicionado com sucesso');
+        this.searchByNameRepresents();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
 }

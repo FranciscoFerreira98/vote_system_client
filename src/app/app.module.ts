@@ -28,6 +28,10 @@ import { DataTablesModule } from "angular-datatables";
 import { VoteComponent } from './vote/vote.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
@@ -52,7 +56,9 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     NgApexchartsModule,
     NgxPaginationModule,
     HttpClientModule,
-    FlatpickrModule.forRoot()
+    FlatpickrModule.forRoot(),
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(),
   ],
   providers: [authInterceptorProviders, { provide: LOCALE_ID, useValue: 'pt-PT' }],
   bootstrap: [AppComponent]

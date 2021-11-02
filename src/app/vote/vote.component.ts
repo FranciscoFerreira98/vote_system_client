@@ -130,7 +130,7 @@ export class VoteComponent implements OnInit {
     
     const data = {
       pollId: this.currentVoter[0].pollId,
-      pollQuestionId: '2',
+      pollQuestionId: '1',
       pollAnswerId: this.radioValue,
     };
     console.log(data);

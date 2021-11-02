@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class FileUploadRepresentativeService {
-  private baseUrl = 'https://backendipcavote.azurewebsites.net';
+  private baseUrl = 'http://localhost:8080';
 
   constructor(private http: HttpClient) { }
 
@@ -37,5 +37,9 @@ export class FileUploadRepresentativeService {
 
   delete(id: any): Observable<any> {
     return this.http.delete(`${this.baseUrl}/api/representatives/${id}`);
+  }
+
+  create(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/representatives/`,data);
   }
 }

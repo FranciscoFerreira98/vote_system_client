@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CountVotesService {
-  private baseUrl = 'https://backendipcavote.azurewebsites.net';
+  private baseUrl = 'http://localhost:8080';
 
   constructor(private http: HttpClient) { }
   
