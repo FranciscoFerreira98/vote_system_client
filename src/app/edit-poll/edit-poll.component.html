@@ -338,3 +338,6 @@
     </div>
   </div>
 </div>
+<div *ngIf="isFinished">
+  <h1>Esta votação já terminou pode ver os resultados <a href="result/{{currentPoll.id}}">aqui!</a></h1>
+</div>

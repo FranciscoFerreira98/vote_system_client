@@ -1,0 +1,151 @@
+<div class="d-flex">
+  <div class="d-flex flex-column align-items-start justify-content-center flex-wrap me-1">
+    <!--begin::Title-->
+    <h3 class="text-dark fw-bolder my-1">Resultado</h3>
+    <!--end::Title-->
+    <!--begin::Breadcrumb-->
+    <ul class="breadcrumb breadcrumb-line bg-transparent text-muted fw-bold p-0 my-1 fs-7">
+      <li class="breadcrumb-item">
+        <a href="#" class="text-muted text-hover-primary">Home</a>
+      </li>
+      <li class="breadcrumb-item"> <a class="text-muted text-hover-primary" href="/mesa"> Dashboard </a></li>
+      <li class="breadcrumb-item text-dark">Resultado</li>
+    </ul>
+    <!--end::Breadcrumb-->
+  </div>
+</div>
+<br>
+<br>
+<div id="div">
+  <div class="content fs-6 d-flex flex-column-fluid" id="kt_content">
+    <!--begin::Container-->
+    <div class="container-xxl">
+      <div class="card">
+        <div class="card-body p-0">
+          <!--begin::Invoice-->
+          <div class="row justify-content-center pt-8 px-8 pt-md-20 px-md-0">
+            <div class="col-md-10">
+              <!-- begin: Invoice header-->
+              <div class="d-flex justify-content-between pb-10 pb-md-20 flex-column flex-md-row">
+                <h1 class="display-6 text-dark fw-bolder mb-10">Resultado - {{currentPoll.name}}</h1>
+                <div class="d-flex flex-column align-items-md-end px-0">
+                  <!--begin::Logo-->
+                  <a href="#" class="mb-5">
+                    <img src="../../assets/img/logo.svg" class="h-50px" alt="img">
+                  </a>
+                  <!--end::Logo-->
+                  <span class="d-flex flex-column align-items-md-end fs-4 fw-bold text-muted">
+                    <span>Campus do IPCA - Lugar do Aldão</span>
+                    <span>4750-810 Vila Frescainha (São Martinho)</span>
+                  </span>
+                </div>
+              </div>
+              <!--end: Invoice header-->
+              <!--begin: Invoice body-->
+              <div class="row border-bottom pb-10">
+                <div class="col-md-9 py-md-10 pe-md-10">
+                  <div class="table-responsive">
+                    <table class="table align-middle table-borderless">
+                      <thead>
+                        <tr class="border-bottom-1 border-bottom-gray-100 fw-bolder text-muted fs-6 text-uppercase">
+                          <th class="pt-5 pb-10 ps-0">Nome</th>
+                          <th class="pt-5 pb-10 text-end">Número</th>
+                          <th class="pt-5 pb-10 text-end">Votos</th>
+                        </tr>
+                      </thead>
+                      <tbody *ngFor="let res of result ">
+                        <tr>
+                          <td class="fw-bolder ps-0 pt-10">
+                            <div class="d-flex align-items-center">
+                              <i class="fa fa-genderless text-primary fs-1 me-2"></i>{{res.name}}</div>
+                          </td>
+                          <td class="text-end pt-10">{{res.num_student}}</td>
+                          <td class="text-end pt-10">{{res.votes}}</td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="border-bottom w-100 mt-7 mb-13"></div>
+                  <div class="d-flex flex-column flex-md-row">
+                    <div class="d-flex flex-column mb-10 mb-md-0">
+                      <div class="fw-bold fs-6 mb-3"><b>Dados</b></div>
+                      <div class="d-flex justify-content-between fs-6 mb-3">
+                        <span class="fw-bold me-15">Abstenção</span>
+                        <span class="text-end">{{abst | number}}%</span>
+                      </div>
+                      <div class="d-flex justify-content-between fs-6 mb-3">
+                        <span class="fw-bold me-15">Votos em branco</span>
+                        <span class="text-end">{{votosBranco}}</span>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 border-start-md ps-md-10 pt-md-10 text-end">
+                  <!--begin::Total Amount-->
+                  <div class="fs-3 fw-bolder text-muted mb-3">TOTAL ELEITORES</div>
+                  <div class="fs-2x fw-bolder">{{numberVoters.allVoters}}</div>
+
+                  <!--end::Total Amount-->
+                  <div class="border-bottom w-100 mb-16"></div>
+                  <!--begin::Invoice To-->
+                  <div class="text-gray-600 fs-6 fw-bold mb-3">TOTAL VOTOS</div>
+                  <div class="fs-6 fw-bold mb-10">{{numResults.nVotes}}
+                    <!--begin::Invoice Date-->
+                    <div class="text-gray-600 fs-6 fw-bold mb-3">DATA</div>
+                    <div class="fs-6 fw-bold">{{currentPoll.end_date | date:'medium'}}</div>
+                    <!--end::Invoice Date-->
+                  </div>
+
+                </div>
+                <!--end: Invoice body-->
+              </div>
+            </div>
+            <div class="row justify-content-center py-8 px-8 py-md-13 px-md-0">
+              <div class="col-md-4">
+                <div id="chart">
+                  <div class="text-gray-600 fs-6 fw-bold mb-3">Grafico</div>
+
+                  <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+                    [dataLabels]="chartOptions.dataLabels" [plotOptions]="chartOptions.plotOptions"
+                    [yaxis]="chartOptions.yaxis" [legend]="chartOptions.legend" [fill]="chartOptions.fill"
+                    [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip" [xaxis]="chartOptions.xaxis">
+                  </apx-chart>
+                </div>
+              </div>
+                <div class="col-md-4">
+                  <apx-chart [series]="chartPolarOptions.series" [chart]="chartPolarOptions.chart"
+                    [labels]="chartPolarOptions.labels" [title]="chartPolarOptions.title"
+                    [theme]="chartPolarOptions.theme" [fill]="chartPolarOptions.fill" [yaxis]="chartPolarOptions.yaxis"
+                    [stroke]="chartPolarOptions.stroke" [legend]="chartPolarOptions.legend"
+                    [plotOptions]="chartPolarOptions.plotOptions"></apx-chart>
+                </div>
+                
+                <div class="col-md-4"><apx-chart
+                    [series]="chartOptionsTree.series"
+                    [chart]="chartOptionsTree.chart"
+                    [dataLabels]="chartOptionsTree.dataLabels"
+                    [plotOptions]="chartOptionsTree.plotOptions"
+                    [title]="chartOptionsTree.title"
+                    [legend]="chartOptionsTree.legend"
+                  ></apx-chart></div>
+              </div>
+            </div>
+            <!-- begin: Invoice action-->
+            <div class="row justify-content-center py-8 px-8 py-md-13 px-md-0">
+              <div class="col-md-10">
+                <div class="d-flex fs-7 flex-wrap">
+                  <button type="button" class="btn btn-primary fw-bolder fs-6 py-4 px-6 me-3 me-sm-6 my-1"
+                    (click)="generatepdf()">Imprimir Resultados</button>
+                </div>
+              </div>
+            </div>
+            <!-- end: Invoice action-->
+            <!--end::Invoice-->
+          </div>
+        </div>
+      </div>
+      <!--end::Container-->
+    </div>
+  </div>

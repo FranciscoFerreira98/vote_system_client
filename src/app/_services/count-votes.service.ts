@@ -17,5 +17,7 @@ export class CountVotesService {
   getNumberOfVotes(id: any): Observable<any> {
     return this.http.get(`${this.baseUrl}/api/count/all/${id}`);
   }
-  
+  getAllVoters(id: any): Observable<any> {
+    return this.http.get(`${this.baseUrl}/api/count/allVoters/${id}`);
+  }
 }

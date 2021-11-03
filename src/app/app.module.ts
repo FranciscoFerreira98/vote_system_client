@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { HttpClientModule } from '@angular/common/http';
 
-import {NgApexchartsModule} from 'ng-apexcharts'
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,6 +31,9 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
+import { ResultComponent } from './result/result.component';
+
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 
 @NgModule({
@@ -44,6 +47,7 @@ import { ToastrModule } from 'ngx-toastr';
     CreatePollComponent,
     EditPollComponent,
     VoteComponent,
+    ResultComponent,
     
   ],
   imports: [
@@ -59,6 +63,7 @@ import { ToastrModule } from 'ngx-toastr';
     FlatpickrModule.forRoot(),
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
+
   ],
   providers: [authInterceptorProviders, { provide: LOCALE_ID, useValue: 'pt-PT' }],
   bootstrap: [AppComponent]
