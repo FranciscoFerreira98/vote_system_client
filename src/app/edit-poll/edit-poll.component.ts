@@ -233,7 +233,8 @@ export class EditPollComponent implements OnInit {
         to: this.voters[i].email,
         name: this.voters[i].name,
         md5: this.voters[i].md5,
-        title: this.currentPoll.name
+        title: this.currentPoll.name,
+        pollId: this.currentPoll.id
       }
 
       console.log(data);
@@ -258,13 +259,14 @@ export class EditPollComponent implements OnInit {
           to: email,
           name: name,
           md5: this.voters[i].md5,
-          title: this.currentPoll.name
+          title: this.currentPoll.name,
+          pollId: this.currentPoll.id
         }
-        console.log(data);
+     
         
      this.email.send(data).subscribe(
        (response) => {
-        this.toastr.success('Email enviado com sucesso');
+        this.toastr.success('Email enviado com sucesso para ' + data.name);
          console.log(response);
        },
        (error) => {

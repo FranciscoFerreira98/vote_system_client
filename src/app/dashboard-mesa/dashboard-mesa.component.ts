@@ -10,6 +10,8 @@ import {FileUploadRepresentativeService } from '../_services/file-upload-represe
 import { FlatpickrModule } from 'angularx-flatpickr';
 import flatpickr from 'flatpickr';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { Validators , FormBuilder, FormGroup,  FormControl } from '@angular/forms';
+
 
 export function flatpickrFactory() {
   flatpickr.localize(Portuguese);
@@ -26,6 +28,11 @@ declare let KTStepper : any;
   styleUrls: ['./dashboard-mesa.component.css'],
 })
 export class DashboardMesaComponent implements OnInit {
+  
+  form = this.fb.group({
+    name: [''],
+    category: [(1)],
+  });
 
   selectedFiles?: FileList;
   currentFile?: File;
@@ -81,18 +88,20 @@ export class DashboardMesaComponent implements OnInit {
   basicDemoValue = new Date();
   startDate = new Date();
 
+
+ 
   constructor(
     private userService: UserService,
     private pollService: PollService,
     private tokenStorageService: TokenStorageService,
     private uploadService: FileUploadService,
-    private uploadRepresentService: FileUploadRepresentativeService
+    private uploadRepresentService: FileUploadRepresentativeService,
+    public fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
 
-    
-  
+   
 
     flatpickrFactory();
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -319,4 +328,8 @@ export class DashboardMesaComponent implements OnInit {
   submitVoters(){
     console.log(this.pollId);
   }
+
+
+  //validate form submission
+  
 }
