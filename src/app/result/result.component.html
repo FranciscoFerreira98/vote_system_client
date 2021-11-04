@@ -103,7 +103,7 @@
               </div>
             </div>
             <div class="row justify-content-center py-8 px-8 py-md-13 px-md-0">
-              <div class="col-md-4">
+              <div class="col-md-10" *ngIf="showChart > 5 && showChart <= 10">
                 <div id="chart">
                   <div class="text-gray-600 fs-6 fw-bold mb-3">Grafico</div>
 
@@ -114,15 +114,16 @@
                   </apx-chart>
                 </div>
               </div>
-                <div class="col-md-4">
-                  <apx-chart [series]="chartPolarOptions.series" [chart]="chartPolarOptions.chart"
-                    [labels]="chartPolarOptions.labels" [title]="chartPolarOptions.title"
-                    [theme]="chartPolarOptions.theme" [fill]="chartPolarOptions.fill" [yaxis]="chartPolarOptions.yaxis"
-                    [stroke]="chartPolarOptions.stroke" [legend]="chartPolarOptions.legend"
-                    [plotOptions]="chartPolarOptions.plotOptions"></apx-chart>
+                <div class="col-md-6" *ngIf="showChart <= 5">
+                  <apx-chart
+                  [series]="chartOptionsPie.series"
+                  [chart]="chartOptionsPie.chart"
+                  [labels]="chartOptionsPie.labels"
+                  [responsive]="chartOptionsPie.responsive"
+                ></apx-chart>
                 </div>
                 
-                <div class="col-md-4"><apx-chart
+                <div class="col-md-10" *ngIf="showChart > 10"><apx-chart
                     [series]="chartOptionsTree.series"
                     [chart]="chartOptionsTree.chart"
                     [dataLabels]="chartOptionsTree.dataLabels"

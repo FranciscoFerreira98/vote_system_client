@@ -55,8 +55,10 @@ export type ChartOptions = {
 export class ResultComponent implements OnInit {
   @ViewChild("chart") chart: ChartComponent | any;
   public chartOptions: Partial<ChartOptions> | any;
-  public chartPolarOptions: Partial<ChartOptions> | any;
+  public chartOptionsPie: Partial<ChartOptions> | any;
   public chartOptionsTree: Partial<ChartOptions> | any;
+
+  showChart = 0;
 
   arvore = [] = [];
   names = [];
@@ -120,12 +122,15 @@ export class ResultComponent implements OnInit {
             objArvore.push(obj);
           }
         }
+
+        this.showChart = results.length;
+
         this.arvore = objArvore;
         this.names = results;
         this.votos = votosAr;
 
         this.initChart();
-        this.initPolarchart();
+        this.initPiechart();
         this.treeChartInit();
       },
       (error) => {
@@ -162,11 +167,9 @@ export class ResultComponent implements OnInit {
   }
 
   initChart() {
-    console.log(this.votos)
-
     this.chartOptions = {
       series: [
-        {
+        { name: "",
           data: this.votos
         },
 
@@ -216,41 +219,20 @@ export class ResultComponent implements OnInit {
     };
   }
 
-  initPolarchart() {
-    this.chartPolarOptions = {
+  initPiechart() {
+    this.chartOptionsPie = {
       series: this.votos,
       chart: {
-        width: 380,
-        type: 'polarArea'
+        type: "donut"
+      },
+      pie: {
+        donut: {
+          size: '65%',
+          background: 'transparent',
+        }
       },
       labels: this.names,
-      fill: {
-        opacity: 1
-      },
-      stroke: {
-        width: 1,
-        colors: undefined
-      },
-      yaxis: {
-        show: false
-      },
-      legend: {
-        position: 'bottom'
-      },
-      plotOptions: {
-        polarArea: {
-          rings: {
-            strokeWidth: 0
-          }
-        }
-      },
-      theme: {
-        monochrome: {
-          //    enabled: true,
-          shadeTo: 'light',
-          shadeIntensity: 0.6
-        }
-      }
+      
     };
   }
 

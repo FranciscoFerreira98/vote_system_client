@@ -20,4 +20,7 @@ export class CountVotesService {
   getAllVoters(id: any): Observable<any> {
     return this.http.get(`${this.baseUrl}/api/count/allVoters/${id}`);
   }
+  getAllVotersFromStart(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/api/count/all/of/time`);
+  }
 }
