@@ -74,6 +74,7 @@ export class DashboardMesaComponent implements OnInit {
     nome: '',
   };
 
+  username = '';
   pollId : any;
   date : any;
   submitBtn : any;
@@ -101,19 +102,22 @@ export class DashboardMesaComponent implements OnInit {
 
   ngOnInit(): void {
 
-   
-
-    flatpickrFactory();
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-    this.element = document.querySelector("#kt_stepper_example_vertical");
-    this.submitBtn = document.querySelector('[data-kt-stepper-action="submit"]'), 
-    this.stepper = new KTStepper(this.element);
+
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
-  
+
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showMesaBoard = this.roles.includes('ROLE_MESA');
+
+      this.username = user.username;
+
+      flatpickrFactory();
+      this.isLoggedIn = !!this.tokenStorageService.getToken();
+      this.element = document.querySelector("#kt_stepper_example_vertical");
+      this.submitBtn = document.querySelector('[data-kt-stepper-action="submit"]'), 
+      this.stepper = new KTStepper(this.element);
 
       this.userService.getAdminBoard().subscribe(
         (data) => {
@@ -124,7 +128,9 @@ export class DashboardMesaComponent implements OnInit {
           this.content = JSON.parse(err.error).message;
         }
       );
+    
     }
+
   }
 
   getRequestParams(searchTitle: string, page: number, pageSize: number): any {

@@ -9,6 +9,7 @@ import { CountVotesService } from '../_services/count-votes.service';
 import { EmailService } from '../_services/email.service';
 import { ToastrService } from 'ngx-toastr';
 
+
 @Component({
   selector: 'app-edit-poll',
   templateUrl: './edit-poll.component.html',
@@ -36,6 +37,12 @@ export class EditPollComponent implements OnInit {
   p: number = 1;
   p1: number = 1;
 
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showMesaBoard = false;
+  username?: string;
+
   constructor(
     private pollService: PollService,
     private votersService: FileUploadService,
@@ -48,13 +55,28 @@ export class EditPollComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getPoll(this.route.snapshot.paramMap.get('id'));
-    this.getVotes(this.route.snapshot.paramMap.get('id'));
-    this.getNumberOfVotes(this.route.snapshot.paramMap.get('id'));
 
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
 
-    this.retrievePolls();
-    this.getAllRepresents();
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showMesaBoard = this.roles.includes('ROLE_MESA');
+
+      this.username = user.username;
+
+      this.getPoll(this.route.snapshot.paramMap.get('id'));
+      this.getVotes(this.route.snapshot.paramMap.get('id'));
+      this.getNumberOfVotes(this.route.snapshot.paramMap.get('id'));
+  
+  
+      this.retrievePolls();
+      this.getAllRepresents();
+    }
+
+  
   }
 
   retrievePolls(): void {

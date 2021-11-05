@@ -113,33 +113,39 @@
             </div>
           </div>
           <div class="modal-body">
-            <div class="py-10 g-5">
-              <div class="col-lg-6 pe-lg-25">
-                <div class="row">
-                  <div class="col-sm-4">
-                    <h3 class="fw-bolder mb-5">Dashboards</h3>
-                    <ul class="
-                        menu
-                        menu-column
-                        menu-fit
-                        menu-rounded
-                        menu-gray-600
-                        menu-hover-primary
-                        menu-active-primary
-                        fw-bold
-                        fs-6
-                        mb-10
-                      ">
-                      <li class="menu-item">
-                        <a class="menu-link ps-0 py-2 active" href="#">Start</a>
-                      </li>
-                      <li class="menu-item" *ngIf="showMesaBoard">
-                        <a class="menu-link ps-0 py-2" routerLink="mesa" href="/mesa">Dashboard</a>
-                      </li>
-                    </ul>
-                  </div>
+            <div class="col-lg-6">
+              <h3 class="fw-bolder mb-8">Menu</h3>
+              <!--begin::Row-->
+              <div class="row g-5">
+                <div class="col-sm-4" *ngIf="showMesaBoard">
+                  <a href="./mesa" class="card bg-light-success hoverable min-h-125px shadow-none mb-5">
+                    <div class="card-body d-flex flex-column flex-center">
+                      <h3 class="fs-3 mb-2 text-dark fw-bolder">Dashboard</h3>
+                    </div>
+                  </a>
                 </div>
+                <div class="col-sm-4">
+                  <a href="https://ipca.pt" class="card bg-light-danger hoverable min-h-125px shadow-none mb-5">
+                    <div class="card-body d-flex flex-column flex-center text-center">
+                      <h3 class="fs-3 mb-2 text-dark fw-bolder">IPCA</h3>
+                    </div>
+                  </a>
+                </div>
+                
               </div>
+              <!--end::Row-->
+              <!--begin::Row-->
+              <div class="row g-5">
+                <div class="col-sm-8">
+                  <a href="https://est.ipca.pt/" class="card bg-light-primary hoverable min-h-125px shadow-none mb-5">
+                    <div class="card-body d-flex flex-column flex-center text-center">
+                      <h3 class="fs-3 mb-2 text-dark fw-bolder">Escola Superior De Tecnologia IPCA</h3>
+                    </div>
+                  </a>
+                </div>
+                
+              </div>
+              <!--end::Row-->
             </div>
           </div>
         </div>

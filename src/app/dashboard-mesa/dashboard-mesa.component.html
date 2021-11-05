@@ -1,4 +1,4 @@
-<div class="marginTop" *ngIf="showAdminBoard">
+<div class="marginTop" *ngIf="showAdminBoard || showMesaBoard">
 
   <div class="row">
     <div class="col-md-4">
@@ -166,23 +166,31 @@
   -->
 </div>
 <div>
-  <div class="row" *ngIf="!isLoggedIn">
-    <div class="col-md-4 marTop18">
-      <h1 class="text-center error404"><b>404</b></h1>
-      <br />
-      <h1 class="text-center error404desc">
-        <b>Ops! Não existe esta página</b>
-      </h1>
-      <br />
-      <a href="#" class="text-center">
-        <button type="button" class="btn btnVoltar">Voltar ao inicio</button>
-      </a>
+  <div class="row" *ngIf="!isLoggedIn || !showMesaBoard || !showAdminBoard">
+    <div class="d-flex flex-column flex-root">
+      <!--begin::Error-->
+      <div class="d-flex flex-column flex-column-fluid position-relative">
+        <!--begin::Background-->
+        <div
+          class="bgi-size-contain bgi-position-x-end bgi-position-y-bottom bgi-no-repeat position-absolute top-0 start-0 w-100 h-100">
+        </div>
+        <!--end::Background-->
+        <!--begin::Content-->
+        <div class="px-10 px-md-20 pt-10 pt-md-14 z-index-1">
+          <a href="/start-html-pro/index.html">
+            <img alt="Logo" src="../../assets/img/logo.svg" class="h-75px">
+          </a>
+        </div>
+        <div
+          class="px-10 px-md-20 py-10 py-md-0 d-flex flex-column justify-content-md-center align-items-start flex-root w-md-700px z-index-1">
+          <p class="display-6 fw-bolder text-gray-800 mb-8">Algo está errado</p>
+          <p class="fs-6 mb-8">Não existe nada aqui!  😥  </p>
+          <a href="/home" class="btn btn-primary fs-6 fw-bolder py-4 px-6 me-auto">Voltar para a pagina inicial</a>
+        </div>
+        <!--end::Content-->
+      </div>
+      <!--end::Error-->
     </div>
-    <div class="col-md-4">
-      <img src="../../assets/img/hand_6.svg" class="imgLogIn" alt="" />
-    </div>
-    <div class="col-md-4"></div>
-  </div>
 </div>
 
 

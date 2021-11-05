@@ -1,343 +1,380 @@
-<div class="d-flex">
-  <div class="d-flex flex-column align-items-start justify-content-center flex-wrap me-1">
-    <!--begin::Title-->
-    <h3 class="text-dark fw-bolder my-1">Votação</h3>
-    <!--end::Title-->
-    <!--begin::Breadcrumb-->
-    <ul class="breadcrumb breadcrumb-line bg-transparent text-muted fw-bold p-0 my-1 fs-7">
-      <li class="breadcrumb-item">
-        <a href="#" class="text-muted text-hover-primary">Home</a>
-      </li>
-      <li class="breadcrumb-item"> <a class="text-muted text-hover-primary" href="/mesa"> Dashboard </a></li>
-      <li class="breadcrumb-item text-dark">Votação</li>
-    </ul>
-    <!--end::Breadcrumb-->
-  </div>
-</div>
-<br>
-<br>
-<div *ngIf="!isFinished">
-  <div *ngIf="isUpdated">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="card card-flush shadow-sm">
-          <div class="card-header">
-            <h3 class="card-title">{{currentPoll.name}}</h3>
-            <div class="card-toolbar">
-              <button type="button" (click)="sendEmail()" class="btn btn-light-primary">
-                Enviar emails
-              </button>
-              <button type="button" (click)="deletePoll()" class="btn btn-light-danger marginLeftEdit">
-                Apagar
-              </button>
-            </div>
-          </div>
-          <div class="card-body py-5">
-            <p>Data de inicio: {{currentPoll.start_date | date:'medium'}}</p>
-            <p>Data final: {{currentPoll.end_date | date:'medium'}}</p>
-          </div>
-
-        </div>
-      </div>
+<div *ngIf="showMesaBoard || showAdminBoard ">
+  <div class="d-flex">
+    <div class="d-flex flex-column align-items-start justify-content-center flex-wrap me-1">
+      <!--begin::Title-->
+      <h3 class="text-dark fw-bolder my-1">Votação</h3>
+      <!--end::Title-->
+      <!--begin::Breadcrumb-->
+      <ul class="breadcrumb breadcrumb-line bg-transparent text-muted fw-bold p-0 my-1 fs-7">
+        <li class="breadcrumb-item">
+          <a href="#" class="text-muted text-hover-primary">Home</a>
+        </li>
+        <li class="breadcrumb-item"> <a class="text-muted text-hover-primary" href="/mesa"> Dashboard </a></li>
+        <li class="breadcrumb-item text-dark">Votação</li>
+      </ul>
+      <!--end::Breadcrumb-->
     </div>
-    <br>
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="card shadow-sm">
+  </div>
+  <br>
+  <br>
+  <div *ngIf="!isFinished">
+    <div *ngIf="isUpdated">
+      <div class="row">
+        <div class="col-sm-12">
           <div class="card card-flush shadow-sm">
             <div class="card-header">
-              <h3 class="card-title">Lista de eleitores</h3>
+              <h3 class="card-title">{{currentPoll.name}}</h3>
               <div class="card-toolbar">
-
+                <button type="button" (click)="sendEmail()" class="btn btn-light-primary">
+                  Enviar emails
+                </button>
+                <button type="button" (click)="deletePoll()" class="btn btn-light-danger marginLeftEdit">
+                  Apagar
+                </button>
               </div>
             </div>
             <div class="card-body py-5">
-              <div>
-                <div class="d-flex flex-stack mb-5">
-                  <!--begin::Search-->
-                  <div class="d-flex align-items-center position-relative my-1">
-                    <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
-                    <span class="svg-icon svg-icon-1 position-absolute ms-6">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
-                          transform="rotate(45 17.0365 15.1223)" fill="black"></rect>
-                        <path
-                          d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
-                          fill="black"></path>
-                      </svg>
-                    </span>
-                    <!--end::Svg Icon-->
-                    <input [(ngModel)]="name" (keyup.enter)="onEnter()" type="text" data-kt-docs-table-filter="search"
-                      class="form-control form-control-solid w-250px ps-15" placeholder="Procurar por aluno">
-                  </div>
-                  <!--end::Search-->
-                  <!--begin::Toolbar-->
-                  <div class="d-flex justify-content-end" data-kt-docs-table-toolbar="base">
-                    <!--begin::Filter-->
+              <p>Data de inicio: {{currentPoll.start_date | date:'medium'}}</p>
+              <p>Data final: {{currentPoll.end_date | date:'medium'}}</p>
+            </div>
 
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_1">
-                      <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
-                      <span class="svg-icon svg-icon-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                          <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1"
-                            transform="rotate(-90 11.364 20.364)" fill="black"></rect>
-                          <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"></rect>
-                        </svg>
-                      </span>
-                      <!--end::Svg Icon-->Adicionar aluno</button>
-                    <!--end::Add customer-->
-                  </div>
-                  <!--end::Toolbar-->
-                  <!--begin::Group actions-->
-                  <div class="d-flex justify-content-end align-items-center d-none"
-                    data-kt-docs-table-toolbar="selected">
-                    <div class="fw-bolder me-5">
-                      <span class="me-2" data-kt-docs-table-select="selected_count"></span>Selected</div>
-                    <button type="button" class="btn btn-danger" data-kt-docs-table-select="delete_selected">Selection
-                      Action</button>
-                  </div>
-                  <!--end::Group actions-->
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card shadow-sm">
+            <div class="card card-flush shadow-sm">
+              <div class="card-header">
+                <h3 class="card-title">Lista de eleitores</h3>
+                <div class="card-toolbar">
+
                 </div>
               </div>
-              <table id="kt_datatable_example_1" class="table align-middle table-row-dashed fs-6 gy-5">
-                <thead>
-                  <tr class="fw-bold fs-6 text-gray-800">
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Número de aluno</th>
-                    <th class="text-end min-w-100px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions">Ação
-                    </th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let voter of voters | paginate : {
+              <div class="card-body py-5">
+                <div>
+                  <div class="d-flex flex-stack mb-5">
+                    <!--begin::Search-->
+                    <div class="d-flex align-items-center position-relative my-1">
+                      <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                      <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                          <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
+                            transform="rotate(45 17.0365 15.1223)" fill="black"></rect>
+                          <path
+                            d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+                            fill="black"></path>
+                        </svg>
+                      </span>
+                      <!--end::Svg Icon-->
+                      <input [(ngModel)]="name" (keyup.enter)="onEnter()" type="text" data-kt-docs-table-filter="search"
+                        class="form-control form-control-solid w-250px ps-15" placeholder="Procurar por aluno">
+                    </div>
+                    <!--end::Search-->
+                    <!--begin::Toolbar-->
+                    <div class="d-flex justify-content-end" data-kt-docs-table-toolbar="base">
+                      <!--begin::Filter-->
+
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_1">
+                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                        <span class="svg-icon svg-icon-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none">
+                            <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1"
+                              transform="rotate(-90 11.364 20.364)" fill="black"></rect>
+                            <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"></rect>
+                          </svg>
+                        </span>
+                        <!--end::Svg Icon-->Adicionar aluno</button>
+                      <!--end::Add customer-->
+                    </div>
+                    <!--end::Toolbar-->
+                    <!--begin::Group actions-->
+                    <div class="d-flex justify-content-end align-items-center d-none"
+                      data-kt-docs-table-toolbar="selected">
+                      <div class="fw-bolder me-5">
+                        <span class="me-2" data-kt-docs-table-select="selected_count"></span>Selected</div>
+                      <button type="button" class="btn btn-danger" data-kt-docs-table-select="delete_selected">Selection
+                        Action</button>
+                    </div>
+                    <!--end::Group actions-->
+                  </div>
+                </div>
+                <table id="kt_datatable_example_1" class="table align-middle table-row-dashed fs-6 gy-5">
+                  <thead>
+                    <tr class="fw-bold fs-6 text-gray-800">
+                      <th>Nome</th>
+                      <th>Email</th>
+                      <th>Número de aluno</th>
+                      <th class="text-end min-w-100px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions">
+                        Ação
+                      </th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let voter of voters | paginate : {
                 itemsPerPage: 5, currentPage: p1,  id: 'voters'
               }">
-                    <td>{{voter.name}}</td>
-                    <td>{{voter.email}}</td>
-                    <td>{{voter.num_student}}</td>
-                    <td class=" text-end">
-                      <button href="#" class="btn btn-light-danger" (click)="deleteVoter(voter.id)">
-                        Apagar
+                      <td>{{voter.name}}</td>
+                      <td>{{voter.email}}</td>
+                      <td>{{voter.num_student}}</td>
+                      <td class=" text-end">
+                        <button href="#" class="btn btn-light-danger" (click)="deleteVoter(voter.id)">
+                          Apagar
 
-                      </button>
+                        </button>
 
-                    </td>
-                    <td>
-                      <button class="btn btn-light-primary" (click)="sendEmailToStudent(voter.email, voter.name)">
-                        Email
-                      </button>
-                      <!--end::Menu-->
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <pagination-controls class="pagination" previousLabel="Prev" nextLabel="Next" [responsive]="true"
-                (pageChange)="p1 = $event" id="voters">"></pagination-controls>
+                      </td>
+                      <td>
+                        <button class="btn btn-light-primary" (click)="sendEmailToStudent(voter.email, voter.name)">
+                          Email
+                        </button>
+                        <!--end::Menu-->
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <pagination-controls class="pagination" previousLabel="Prev" nextLabel="Next" [responsive]="true"
+                  (pageChange)="p1 = $event" id="voters">"></pagination-controls>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="card shadow-sm">
-          <div class="card card-flush shadow-sm">
-            <div class="card-header">
-              <h3 class="card-title">Lista de representantes</h3>
-              <div class="card-toolbar">
+        <div class="col-sm-6">
+          <div class="card shadow-sm">
+            <div class="card card-flush shadow-sm">
+              <div class="card-header">
+                <h3 class="card-title">Lista de representantes</h3>
+                <div class="card-toolbar">
 
-              </div>
-            </div>
-            <div class="card-body py-5">
-              <div>
-                <div class="d-flex flex-stack mb-5">
-                  <!--begin::Search-->
-                  <div class="d-flex align-items-center position-relative my-1">
-                    <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
-                    <span class="svg-icon svg-icon-1 position-absolute ms-6">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
-                          transform="rotate(45 17.0365 15.1223)" fill="black"></rect>
-                        <path
-                          d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
-                          fill="black"></path>
-                      </svg>
-                    </span>
-                    <!--end::Svg Icon-->
-                    <input [(ngModel)]="nameRepresent" (keyup.enter)="onEnter()" type="text"
-                      data-kt-docs-table-filter="search" class="form-control form-control-solid w-250px ps-15"
-                      placeholder="Procurar por aluno">
-                  </div>
-                  <!--end::Search-->
-                  <!--begin::Toolbar-->
-                  <div class="d-flex justify-content-end" data-kt-docs-table-toolbar="base">
-                    <!--begin::Filter-->
-
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_2">
-                      <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
-                      <span class="svg-icon svg-icon-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                          <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1"
-                            transform="rotate(-90 11.364 20.364)" fill="black"></rect>
-                          <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"></rect>
-                        </svg>
-                      </span>
-                      <!--end::Svg Icon-->Adicionar aluno</button>
-                    <!--end::Add customer-->
-                  </div>
-                  <!--end::Toolbar-->
-                  <!--begin::Group actions-->
-                  <div class="d-flex justify-content-end align-items-center d-none"
-                    data-kt-docs-table-toolbar="selected">
-                    <div class="fw-bolder me-5">
-                      <span class="me-2" data-kt-docs-table-select="selected_count"></span>Selected</div>
-                    <button type="button" class="btn btn-danger" data-kt-docs-table-select="delete_selected">Selection
-                      Action</button>
-                  </div>
-                  <!--end::Group actions-->
                 </div>
               </div>
-              <table id="kt_datatable_example_1" class="table align-middle table-row-dashed fs-6 gy-5">
-                <thead>
-                  <tr class="fw-bold fs-6 text-gray-800">
-                    <th>Nome</th>
-                    <th>Número de aluno</th>
-                    <th class="text-end min-w-100px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions">Ação
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let repre of allRepresentatives | paginate : {
+              <div class="card-body py-5">
+                <div>
+                  <div class="d-flex flex-stack mb-5">
+                    <!--begin::Search-->
+                    <div class="d-flex align-items-center position-relative my-1">
+                      <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                      <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                          <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
+                            transform="rotate(45 17.0365 15.1223)" fill="black"></rect>
+                          <path
+                            d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+                            fill="black"></path>
+                        </svg>
+                      </span>
+                      <!--end::Svg Icon-->
+                      <input [(ngModel)]="nameRepresent" (keyup.enter)="onEnter()" type="text"
+                        data-kt-docs-table-filter="search" class="form-control form-control-solid w-250px ps-15"
+                        placeholder="Procurar por aluno">
+                    </div>
+                    <!--end::Search-->
+                    <!--begin::Toolbar-->
+                    <div class="d-flex justify-content-end" data-kt-docs-table-toolbar="base">
+                      <!--begin::Filter-->
+
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_2">
+                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                        <span class="svg-icon svg-icon-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none">
+                            <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1"
+                              transform="rotate(-90 11.364 20.364)" fill="black"></rect>
+                            <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"></rect>
+                          </svg>
+                        </span>
+                        <!--end::Svg Icon-->Adicionar aluno</button>
+                      <!--end::Add customer-->
+                    </div>
+                    <!--end::Toolbar-->
+                    <!--begin::Group actions-->
+                    <div class="d-flex justify-content-end align-items-center d-none"
+                      data-kt-docs-table-toolbar="selected">
+                      <div class="fw-bolder me-5">
+                        <span class="me-2" data-kt-docs-table-select="selected_count"></span>Selected</div>
+                      <button type="button" class="btn btn-danger" data-kt-docs-table-select="delete_selected">Selection
+                        Action</button>
+                    </div>
+                    <!--end::Group actions-->
+                  </div>
+                </div>
+                <table id="kt_datatable_example_1" class="table align-middle table-row-dashed fs-6 gy-5">
+                  <thead>
+                    <tr class="fw-bold fs-6 text-gray-800">
+                      <th>Nome</th>
+                      <th>Número de aluno</th>
+                      <th class="text-end min-w-100px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions">
+                        Ação
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let repre of allRepresentatives | paginate : {
                 itemsPerPage: 5, currentPage: p, id: 'allRepresentatives'
               }">
-                    <td>{{repre.name}}</td>
-                    <td>{{repre.num_student}}</td>
-                    <td class=" text-end">
-                      <button href="#" class="btn btn-light-danger" (click)="deleteRepresent(repre.id)">
-                        Apagar
+                      <td>{{repre.name}}</td>
+                      <td>{{repre.num_student}}</td>
+                      <td class=" text-end">
+                        <button href="#" class="btn btn-light-danger" (click)="deleteRepresent(repre.id)">
+                          Apagar
 
-                      </button>
+                        </button>
 
-                      <!--end::Menu-->
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <pagination-controls class="pagination" previousLabel="Prev" nextLabel="Next" [responsive]="true"
-                (pageChange)="p = $event" id="allRepresentatives"></pagination-controls>
+                        <!--end::Menu-->
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <pagination-controls class="pagination" previousLabel="Prev" nextLabel="Next" [responsive]="true"
+                  (pageChange)="p = $event" id="allRepresentatives"></pagination-controls>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div *ngIf="!isUpdated">
-    <div class="row">
-      <img src="../../assets/img/logo.svg" class="imgCreate">
+    <div *ngIf="!isUpdated">
+      <div class="row">
+        <img src="../../assets/img/logo.svg" class="imgCreate">
+        <br>
+        <h1>A votação ja começou não pode edita-la</h1>
+        <h4>Agredecemos a compreensão</h4>
+      </div>
       <br>
-      <h1>A votação ja começou não pode edita-la</h1>
-      <h4>Agredecemos a compreensão</h4>
-    </div>
-    <br>
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="card card-flush shadow-sm">
-          <div class="card-header">
-            <h3 class="card-title">{{currentPoll.name}}</h3>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card card-flush shadow-sm">
+            <div class="card-header">
+              <h3 class="card-title">{{currentPoll.name}}</h3>
+
+            </div>
+            <div class="card-body py-5">
+              <p>Data de inicio: {{currentPoll.start_date | date:'medium'}}</p>
+              <p>Data final: {{currentPoll.end_date | date:'medium'}}</p>
+            </div>
 
           </div>
-          <div class="card-body py-5">
-            <p>Data de inicio: {{currentPoll.start_date | date:'medium'}}</p>
-            <p>Data final: {{currentPoll.end_date | date:'medium'}}</p>
-          </div>
-
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="modal fade" tabindex="-1" id="kt_modal_1">
-  <div class="modal-dialog modal-dialog-centered mw-800px">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title">Adicionar aluno</h2>
+  <div class="modal fade" tabindex="-1" id="kt_modal_1">
+    <div class="modal-dialog modal-dialog-centered mw-800px">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">Adicionar aluno</h2>
 
-        <!--begin::Close-->
-        <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
-          <span class="svg-icon svg-icon-2x"></span>
+          <!--begin::Close-->
+          <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+            <span class="svg-icon svg-icon-2x"></span>
+          </div>
+          <!--end::Close-->
         </div>
-        <!--end::Close-->
-      </div>
 
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-6">
-            <div class="mb-4">
-              <label for="exampleFormControlInput1" class="required form-label">Nome do aluno</label>
-              <input type="text" class="form-control form-control-solid" [(ngModel)]="studentName" placeholder="Nome" />
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="mb-4">
+                <label for="exampleFormControlInput1" class="required form-label">Nome do aluno</label>
+                <input type="text" class="form-control form-control-solid" [(ngModel)]="studentName"
+                  placeholder="Nome" />
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mb-10">
+                <label for="exampleFormControlInput1" class="required form-label">Número do aluno</label>
+                <input type="number" class="form-control form-control-solid" [(ngModel)]="modalNum_student"
+                  placeholder="Número do aluno" />
+              </div>
             </div>
           </div>
-          <div class="col-6">
-            <div class="mb-10">
-              <label for="exampleFormControlInput1" class="required form-label">Número do aluno</label>
-              <input type="number" class="form-control form-control-solid" [(ngModel)]="modalNum_student" placeholder="Número do aluno" />
-            </div>
+          <div class="mb-10">
+            <label for="exampleFormControlInput1" class="required form-label">Email</label>
+            <input type="email" class="form-control form-control-solid" [(ngModel)]="modalEmail" placeholder="Email" />
           </div>
         </div>
-        <div class="mb-10">
-          <label for="exampleFormControlInput1" class="required form-label">Email</label>
-          <input type="email" class="form-control form-control-solid" [(ngModel)]="modalEmail" placeholder="Email" />
-        </div>
-      </div>
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fechar</button>
-        <button type="button" (click)="addStudent()" class="btn btn-primary">Adicionar</button>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fechar</button>
+          <button type="button" (click)="addStudent()" class="btn btn-primary">Adicionar</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
-<div class="modal fade" tabindex="-1" id="kt_modal_2">
-  <div class="modal-dialog modal-dialog-centered mw-800px">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title">Adicionar aluno</h2>
+  <div class="modal fade" tabindex="-1" id="kt_modal_2">
+    <div class="modal-dialog modal-dialog-centered mw-800px">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">Adicionar aluno</h2>
 
-        <!--begin::Close-->
-        <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
-          <span class="svg-icon svg-icon-2x"></span>
+          <!--begin::Close-->
+          <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+            <span class="svg-icon svg-icon-2x"></span>
+          </div>
+          <!--end::Close-->
         </div>
-        <!--end::Close-->
-      </div>
 
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-6">
-            <div class="mb-4">
-              <label for="exampleFormControlInput1" class="required form-label">Nome do aluno</label>
-              <input type="text" class="form-control form-control-solid" [(ngModel)]="studentName" placeholder="Nome" />
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="mb-4">
+                <label for="exampleFormControlInput1" class="required form-label">Nome do aluno</label>
+                <input type="text" class="form-control form-control-solid" [(ngModel)]="studentName"
+                  placeholder="Nome" />
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mb-10">
+                <label for="exampleFormControlInput1" class="required form-label">Número do aluno</label>
+                <input type="number" class="form-control form-control-solid" [(ngModel)]="modalNum_student"
+                  placeholder="Número do aluno" />
+              </div>
             </div>
           </div>
-          <div class="col-6">
-            <div class="mb-10">
-              <label for="exampleFormControlInput1" class="required form-label">Número do aluno</label>
-              <input type="number" class="form-control form-control-solid" [(ngModel)]="modalNum_student" placeholder="Número do aluno" />
-            </div>
-          </div>
         </div>
-      </div>
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fechar</button>
-        <button type="button" (click)="addStudentRepresentative()" class="btn btn-primary">Adicionar</button>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fechar</button>
+          <button type="button" (click)="addStudentRepresentative()" class="btn btn-primary">Adicionar</button>
+        </div>
       </div>
     </div>
   </div>
+  <div *ngIf="isFinished">
+    <h1>Esta votação já terminou pode ver os resultados <a href="result/{{currentPoll.id}}">aqui!</a></h1>
+  </div>
 </div>
-<div *ngIf="isFinished">
-  <h1>Esta votação já terminou pode ver os resultados <a href="result/{{currentPoll.id}}">aqui!</a></h1>
+<div *ngIf="!showAdminBoard || !showMesaBoard || !isLoggedIn">
+
+  <div class="d-flex flex-column flex-root">
+    <!--begin::Error-->
+    <div class="d-flex flex-column flex-column-fluid position-relative">
+      <!--begin::Background-->
+      <div
+        class="bgi-size-contain bgi-position-x-end bgi-position-y-bottom bgi-no-repeat position-absolute top-0 start-0 w-100 h-100">
+      </div>
+      <!--end::Background-->
+      <!--begin::Content-->
+      <div class="px-10 px-md-20 pt-10 pt-md-14 z-index-1">
+        <a href="/start-html-pro/index.html">
+          <img alt="Logo" src="../../assets/img/logo.svg" class="h-75px">
+        </a>
+      </div>
+      <div
+        class="px-10 px-md-20 py-10 py-md-0 d-flex flex-column justify-content-md-center align-items-start flex-root w-md-700px z-index-1">
+        <p class="display-6 fw-bolder text-gray-800 mb-8">Algo está errado</p>
+        <p class="fs-6 mb-8">Não existe nada aqui!  😥  </p>
+        <a href="/home" class="btn btn-primary fs-6 fw-bolder py-4 px-6 me-auto">Voltar para a pagina inicial</a>
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Error-->
+  </div>
 </div>
