@@ -1,0 +1,17 @@
+{
+  "hosting": [
+    {
+      "app": {
+        "project": "client",
+        "target": "build",
+        "configuration": "production",
+        "path": "dist/client"
+      },
+      "azureHosting": {
+        "subscription": "5b42220e-8455-464b-a38a-c88ba07c40ab",
+        "resourceGroupName": "client-static-deploy83",
+        "account": "walkingrivernotify"
+      }
+    }
+  ]
+}

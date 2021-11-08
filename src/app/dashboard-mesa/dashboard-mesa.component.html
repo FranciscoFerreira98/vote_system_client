@@ -330,8 +330,8 @@
           <!--begin::Content-->
           <div class="flex-row-fluid py-lg-5 px-lg-15">
             <!--begin::Form-->
-            <form class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate"
-              id="kt_modal_create_app_form" [formGroup]="form" name="form">
+            <form class="form fv-plugins-bootstrap5 fv-plugins-framework" [formGroup]="createPollForm"
+              id="kt_modal_create_app_form">
               <!--begin::Step 1-->
               <div class="current" data-kt-stepper-element="content">
                 <div class="w-100">
@@ -347,10 +347,10 @@
                     <!--end::Label-->
                     <!--begin::Input-->
                     <input type="text" class="form-control form-control-lg form-control-solid" name="name"
-                      placeholder="" [(ngModel)]="poll.nome"  value="" required>
+                      placeholder="" [(ngModel)]="poll.nome"  formControlName="appName" required>
                   
                     <!--end::Input-->
-                    <div class="fv-plugins-message-container invalid-feedback" *ngIf="!form.valid">
+                    <div class="fv-plugins-message-container invalid-feedback" *ngIf="!createPollForm.valid">
                       Preencha o campo por favor
                     </div>
                   </div>
@@ -399,7 +399,7 @@
                         <!--end:Label-->
                         <!--begin:Input-->
                         <span class="form-check form-check-custom form-check-solid">
-                          <input class="form-check-input" type="radio" name="category" value="1" checked formControlName="category">
+                          <input class="form-check-input" type="radio" name="category" value="1"  formControlName="category">
                         </span>
                         <!--end:Input-->
                       </label>
@@ -524,7 +524,7 @@
                         <input class="form-control form-control-solid" type="text" mwlFlatpickr [altInput]="true"
                           [convertModelValue]="true" mode="range" [time24hr]="true" [(ngModel)]="date"
                           [dateFormat]="'Y-m-d:H:i'" name="rangeDates" [locale]="'Portuguese'" [minDate]="today"
-                          [enableTime]="true" formControlName="name">
+                          [enableTime]="true" formControlName="pick">
 
                       </span>
                       <!--end:Input-->
@@ -674,7 +674,7 @@
                 <!--end::Wrapper-->
                 <!--begin::Wrapper-->
                 <div>
-                  <button type="button" class="btn btn-lg btn-primary" (click)="submitVoters()"
+                  <button type="button" class="btn btn-lg btn-primary"
                     data-kt-stepper-action="submit">
                     <span class="indicator-label">Submit
                       <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
@@ -692,7 +692,7 @@
                       <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                   </button>
                   <button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next"
-                    (click)="goNext()" [disabled]="!form.valid">Próximo
+                    (click)="goNext()" [disabled]="!createPollForm.valid">Próximo
                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
                     <span class="svg-icon svg-icon-3 ms-1 me-0">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

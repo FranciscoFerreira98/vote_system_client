@@ -11,6 +11,7 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import flatpickr from 'flatpickr';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Validators , FormBuilder, FormGroup,  FormControl } from '@angular/forms';
+import { data } from 'jquery';
 
 
 export function flatpickrFactory() {
@@ -28,11 +29,17 @@ declare let KTStepper : any;
   styleUrls: ['./dashboard-mesa.component.css'],
 })
 export class DashboardMesaComponent implements OnInit {
+
   
-  form = this.fb.group({
-    name: [''],
-    category: [(1)],
-  });
+    createPollForm = this.fb.group({
+      appName: ['',Validators.required],
+      category: ['',Validators.required],
+      pick:[''],
+      button:[''],
+      voters:[''],
+      representatives:[''],
+    });
+
 
   selectedFiles?: FileList;
   currentFile?: File;
@@ -191,6 +198,9 @@ export class DashboardMesaComponent implements OnInit {
             if (event.type === HttpEventType.UploadProgress) {
               this.progress = Math.round(100 * event.loaded / event.total);
             } else if (event instanceof HttpResponse) {
+              this.createPollForm.patchValue({
+                voters: event.body.message
+              });
               this.message = event.body.message;
               this.fileInfos = this.uploadService.getFiles();
             }
@@ -220,16 +230,16 @@ export class DashboardMesaComponent implements OnInit {
   
     if (this.selectedFilesRepresents) {
       const file: File | null = this.selectedFilesRepresents.item(0);
-      console.log("entrei 1");
       if (file) {
         this.currentFileRepresent = file;
-        console.log("entrei 2");
         this.uploadRepresentService.upload(this.currentFileRepresent,this.pollId).subscribe(
           (event: any) => {
-            console.log("entrei 3");
             if (event.type === HttpEventType.UploadProgress) {
               this.progressRepresent = Math.round(100 * event.loaded / event.total);
             } else if (event instanceof HttpResponse) {
+              this.createPollForm.patchValue({
+                representatives: event.body.message
+              });
               this.messageRepresent = event.body.message;
               this.fileInfosRepresent = this.uploadRepresentService.getFiles();
             }
@@ -259,7 +269,6 @@ export class DashboardMesaComponent implements OnInit {
     this.pollService.getAll().subscribe(
       (data) => {
         this.polls = data;
-        console.log(data);
       },
       (error) => {
         console.log(error);
@@ -281,7 +290,6 @@ export class DashboardMesaComponent implements OnInit {
   removeAllPolls(): void {
     this.pollService.deleteAll().subscribe(
       (response) => {
-        console.log(response);
         this.refreshList();
       },
       (error) => {
@@ -296,6 +304,15 @@ export class DashboardMesaComponent implements OnInit {
   }
 
   goNext(){
+   
+
+    if(this.stepper.getCurrentStepIndex() == 1){
+      this.createPollForm.setControl('pick', this.fb.control('', [Validators.required])); 
+      this.createPollForm.setControl('button', this.fb.control('', [Validators.required])); 
+    }
+    if(this.stepper.getCurrentStepIndex() == 2){
+      this.createPollForm.setControl('voters', this.fb.control('', [Validators.required])); 
+    }
     if(this.stepper.getCurrentStepIndex() == 4){
       this.submitBtn.classList.add("d-inline-block");
     }
@@ -315,10 +332,12 @@ export class DashboardMesaComponent implements OnInit {
       start_date: this.date.from,
       end_date: this.date.to
     };
+    this.createPollForm.patchValue({
+      button: this.date.from,
+    });
 
     this.pollService.create(data).subscribe(
       (response) => {
-        console.log(response);
         this.pollId = response.id;
         this.isSuccessful = true;
         this.isError = false;
@@ -329,12 +348,10 @@ export class DashboardMesaComponent implements OnInit {
         console.log(error);
       }
     );
-  }
+    }
 
-  submitVoters(){
-    console.log(this.pollId);
-  }
 
+    
 
   //validate form submission
   
