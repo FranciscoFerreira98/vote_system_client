@@ -5,6 +5,7 @@ import { TokenStorageService } from '../_services/token-storage.service';
 import { VoteService } from '../_services/vote.service';
 import { FileUploadRepresentativeService } from '../_services/file-upload-representatives.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CountVotesService } from '../_services/count-votes.service';
 
 
 @Component({
@@ -33,6 +34,8 @@ export class VoteComponent implements OnInit {
   selectedItemsList = [];
   checkedIDs = [];
 
+  allVotes = 0;
+  co2 = 0;
 
   constructor(
     private pollService: PollService,
@@ -40,11 +43,13 @@ export class VoteComponent implements OnInit {
     private representativeService: FileUploadRepresentativeService,
     private tokenStorageService: TokenStorageService,
     private route: ActivatedRoute,
-    private voteService: VoteService
+    private voteService: VoteService,
+    private countVotes: CountVotesService
   ) {}
 
   ngOnInit(): void {
     this.getVoters(this.route.snapshot.paramMap.get('id'));
+    this.retriveAllVotesFromBeggining();
     
   }
 
@@ -124,6 +129,20 @@ export class VoteComponent implements OnInit {
         val.isSelected = false;
       }
     });
+  }
+
+  retriveAllVotesFromBeggining(){
+    this.countVotes.getAllVotersFromStart().subscribe(
+      (data) => {
+        console.log(data);
+        this.allVotes = data.allVoters;
+
+        this.co2 = (0.72 * data.allVoters) / 500;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   onSubmit() {

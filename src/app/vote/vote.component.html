@@ -80,9 +80,9 @@
       </div>
       <div
         class="px-10 px-md-20 py-10 py-md-0 d-flex flex-column justify-content-md-center align-items-start flex-root w-md-700px z-index-1">
-        <p class="display-6 fw-bolder text-gray-800 mb-8">O teu voto já foi registado</p>
-        <p class="fs-6 mb-8">Graças a teu voto já poupamos juntos x arvores.</p>
-
+        <p class="display-6 fw-bolder text-gray-800 mb-8">O teu voto foi registado</p>
+        <p class="fs-6 mb-8">Graças a teu voto já poupamos juntos <span class="fw-bolder text-gray-900">{{allVotes}}</span>
+          folhas de papel equivalente a <span class="fw-bolder text-gray-900"> {{co2 | number : '1.2-4'}}Kg de CO<sub>2</sub>. </span></p>
 
         <a href="/home" class="btn btn-primary fs-6 fw-bolder py-4 px-6 me-auto">Voltar para a pagina inicial</a>
       </div>

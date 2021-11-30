@@ -5,3 +5,7 @@
 .pad0 {
   padding-left: 0px !important;
 }
+
+.text-gray-900.dark-mode {
+  color: #ffffff !important;
+}

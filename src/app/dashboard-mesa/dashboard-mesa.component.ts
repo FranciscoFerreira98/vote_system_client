@@ -80,7 +80,7 @@ export class DashboardMesaComponent implements OnInit {
   poll = {
     nome: '',
   };
-
+  pollRespons:any;
   username = '';
   pollId : any;
   date : any;
@@ -339,6 +339,7 @@ export class DashboardMesaComponent implements OnInit {
     this.pollService.create(data).subscribe(
       (response) => {
         this.pollId = response.id;
+        this.pollRespons = response;
         this.isSuccessful = true;
         this.isError = false;
       },

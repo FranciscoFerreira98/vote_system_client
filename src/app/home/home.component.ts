@@ -11,6 +11,7 @@ import { CountVotesService } from '../_services/count-votes.service';
 export class HomeComponent implements OnInit {
   content?: string;
   allVotes = 0;
+  co2 = 0;
 
 
   constructor(private userService: UserService, private countVotes: CountVotesService) { }
@@ -32,10 +33,13 @@ export class HomeComponent implements OnInit {
       (data) => {
         console.log(data);
         this.allVotes = data.allVoters;
+
+        this.co2 = (0.72 * data.allVoters) / 500;
       },
       (error) => {
         console.log(error);
       }
     );
   }
+  
 }

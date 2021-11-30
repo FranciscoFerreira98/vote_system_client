@@ -1,3 +1,4 @@
+
 body.dark-mode {
   background-color: #0d1117;
   color: #ffffff;
@@ -64,12 +65,8 @@ body:not(.dark-mode-preloading) {
   width: 100%;
 }
 
-footer {
-  clear: both;
-  position: relative;
-  height: 200px;
-  margin-top: -200px;
-}
+
+
 
 .submitBtn {
   display: none;
