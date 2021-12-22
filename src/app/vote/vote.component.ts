@@ -15,6 +15,7 @@ import { CountVotesService } from '../_services/count-votes.service';
 })
 export class VoteComponent implements OnInit {
   //variaveis
+  questionId :any;
   currentPoll: any;
   currentVoter: any;
   allRepresentatives: any;
@@ -73,6 +74,7 @@ export class VoteComponent implements OnInit {
         this.currentVoter = data;
         if (data[0].voted == false) {
           this.getPoll(data[0].pollId);
+          this.getQuestionId(data[0].pollId);
           this.showVote = true;
         }
       },
@@ -91,6 +93,19 @@ export class VoteComponent implements OnInit {
       },
       (error) => {
         console.log(error);
+      }
+    );
+  }
+
+  getQuestionId(id:any):void {
+     
+    this.voteService.findQuestion(id).subscribe(
+      (response) => {
+        this.questionId = response;
+        console.log(response);
+      },
+      (response) => {
+        console.log(response);
       }
     );
   }
@@ -149,7 +164,7 @@ export class VoteComponent implements OnInit {
     
     const data = {
       pollId: this.currentVoter[0].pollId,
-      pollQuestionId: '1',
+      pollQuestionId: this.questionId[0].id,
       pollAnswerId: this.radioValue,
     };
     console.log(data);

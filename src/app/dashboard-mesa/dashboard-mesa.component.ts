@@ -6,11 +6,11 @@ import { PollService } from 'src/app/_services/poll.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { Portuguese } from 'flatpickr/dist/l10n/pt';
 import { FileUploadService } from 'src/app/_services/file-upload.service';
-import {FileUploadRepresentativeService } from '../_services/file-upload-representatives.service';
+import { FileUploadRepresentativeService } from '../_services/file-upload-representatives.service';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import flatpickr from 'flatpickr';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { Validators , FormBuilder, FormGroup,  FormControl } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { data } from 'jquery';
 
 
@@ -20,7 +20,7 @@ export function flatpickrFactory() {
 }
 
 
-declare let KTStepper : any;
+declare let KTStepper: any;
 
 
 @Component({
@@ -30,15 +30,15 @@ declare let KTStepper : any;
 })
 export class DashboardMesaComponent implements OnInit {
 
-  
-    createPollForm = this.fb.group({
-      appName: ['',Validators.required],
-      category: ['',Validators.required],
-      pick:[''],
-      button:[''],
-      voters:[''],
-      representatives:[''],
-    });
+
+  createPollForm = this.fb.group({
+    appName: ['', Validators.required],
+    category: ['', Validators.required],
+    pick: [''],
+    button: [''],
+    voters: [''],
+    representatives: [''],
+  });
 
 
   selectedFiles?: FileList;
@@ -49,7 +49,7 @@ export class DashboardMesaComponent implements OnInit {
   currentFileRepresent?: File;
   progressRepresent = 0;
 
-  messageRepresent ?: string;
+  messageRepresent?: string;
 
   fileInfos?: Observable<any>;
   fileInfosRepresent?: Observable<any>;
@@ -70,8 +70,8 @@ export class DashboardMesaComponent implements OnInit {
   isLoggedIn = false;
   showAdminBoard = false;
   showMesaBoard = false;
-  element:any;
-  stepper:any;
+  element: any;
+  stepper: any;
 
   message?: string;
   isSuccessful = false;
@@ -80,11 +80,11 @@ export class DashboardMesaComponent implements OnInit {
   poll = {
     nome: '',
   };
-  pollRespons:any;
+  pollRespons: any;
   username = '';
-  pollId : any;
-  date : any;
-  submitBtn : any;
+  pollId: any;
+  date: any;
+  submitBtn: any;
 
   getDate = new Date();
   dd = String(this.getDate.getDate()).padStart(2, '0');
@@ -97,7 +97,7 @@ export class DashboardMesaComponent implements OnInit {
   startDate = new Date();
 
 
- 
+
   constructor(
     private userService: UserService,
     private pollService: PollService,
@@ -105,7 +105,7 @@ export class DashboardMesaComponent implements OnInit {
     private uploadService: FileUploadService,
     private uploadRepresentService: FileUploadRepresentativeService,
     public fb: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit(): void {
 
@@ -123,8 +123,8 @@ export class DashboardMesaComponent implements OnInit {
       flatpickrFactory();
       this.isLoggedIn = !!this.tokenStorageService.getToken();
       this.element = document.querySelector("#kt_stepper_example_vertical");
-      this.submitBtn = document.querySelector('[data-kt-stepper-action="submit"]'), 
-      this.stepper = new KTStepper(this.element);
+      this.submitBtn = document.querySelector('[data-kt-stepper-action="submit"]'),
+        this.stepper = new KTStepper(this.element);
 
       this.userService.getAdminBoard().subscribe(
         (data) => {
@@ -135,7 +135,7 @@ export class DashboardMesaComponent implements OnInit {
           this.content = JSON.parse(err.error).message;
         }
       );
-    
+
     }
 
   }
@@ -188,12 +188,12 @@ export class DashboardMesaComponent implements OnInit {
       if (file) {
         this.currentFile = file;
         const data = {
-         file: file,
-         pollId: this.pollId, 
+          file: file,
+          pollId: this.pollId,
         }
-        
 
-        this.uploadService.upload(this.currentFile,this.pollId).subscribe(
+
+        this.uploadService.upload(this.currentFile, this.pollId).subscribe(
           (event: any) => {
             if (event.type === HttpEventType.UploadProgress) {
               this.progress = Math.round(100 * event.loaded / event.total);
@@ -227,12 +227,12 @@ export class DashboardMesaComponent implements OnInit {
 
   uploadRepresent(): void {
     this.progress = 0;
-  
+
     if (this.selectedFilesRepresents) {
       const file: File | null = this.selectedFilesRepresents.item(0);
       if (file) {
         this.currentFileRepresent = file;
-        this.uploadRepresentService.upload(this.currentFileRepresent,this.pollId).subscribe(
+        this.uploadRepresentService.upload(this.currentFileRepresent, this.pollId).subscribe(
           (event: any) => {
             if (event.type === HttpEventType.UploadProgress) {
               this.progressRepresent = Math.round(100 * event.loaded / event.total);
@@ -297,32 +297,36 @@ export class DashboardMesaComponent implements OnInit {
       }
     );
   }
-  goBack(){
-    
+  goBack() {
+
     this.stepper.goPrevious(); // go next step 
     this.submitBtn.classList.remove("d-inline-block");
   }
 
-  goNext(){
-   
+  goNext() {
 
-    if(this.stepper.getCurrentStepIndex() == 1){
-      this.createPollForm.setControl('pick', this.fb.control('', [Validators.required])); 
-      this.createPollForm.setControl('button', this.fb.control('', [Validators.required])); 
+
+    if (this.stepper.getCurrentStepIndex() == 1) {
+      this.createPollForm.setControl('pick', this.fb.control('', [Validators.required]));
+      this.createPollForm.setControl('button', this.fb.control('', [Validators.required]));
     }
-    if(this.stepper.getCurrentStepIndex() == 2){
-      this.createPollForm.setControl('voters', this.fb.control('', [Validators.required])); 
+    if (this.stepper.getCurrentStepIndex() == 2) {
+      this.createPollForm.setControl('voters', this.fb.control('', [Validators.required]));
     }
-    if(this.stepper.getCurrentStepIndex() == 4){
+    if (this.stepper.getCurrentStepIndex() == 4) {
       this.submitBtn.classList.add("d-inline-block");
     }
-    if(this.stepper.getCurrentStepIndex() != 4){
+    if (this.stepper.getCurrentStepIndex() != 4) {
       this.submitBtn.classList.remove("d-inline-block");
     }
-    
+
 
     this.stepper.goNext(); // go next step
 
+  }
+
+  closeModal() {
+    this.element = document.querySelector("#kt_stepper_example_vertical");
   }
 
 
@@ -349,11 +353,11 @@ export class DashboardMesaComponent implements OnInit {
         console.log(error);
       }
     );
-    }
+  }
 
 
-    
+
 
   //validate form submission
-  
+
 }

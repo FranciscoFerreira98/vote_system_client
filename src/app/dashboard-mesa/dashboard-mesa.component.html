@@ -166,7 +166,7 @@
   -->
 </div>
 <div>
-  <div class="row" *ngIf="!isLoggedIn || !showMesaBoard || !showAdminBoard">
+  <div class="row" *ngIf="!isLoggedIn && !showMesaBoard && !showAdminBoard">
     <div class="d-flex flex-column flex-root">
       <!--begin::Error-->
       <div class="d-flex flex-column flex-column-fluid position-relative">

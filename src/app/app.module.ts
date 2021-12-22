@@ -34,6 +34,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ResultComponent } from './result/result.component';
 
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     EditPollComponent,
     VoteComponent,
     ResultComponent,
+    RegisterComponent,
     
   ],
   imports: [
