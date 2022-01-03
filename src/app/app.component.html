@@ -1,201 +1,162 @@
-<div id="app">
-  <div class="container">
-    <div class="header">
-      <div class="d-flex align-items-center">
-        <!--begin::Mega Menu Toggler-->
-        <button type="button" class="btn btn-icon btn-accent me-2 me-lg-6" data-bs-toggle="modal"
-          data-bs-target="#exampleModal">
-          <!--begin::Svg Icon | path: icons/duotone/Text/Article.svg-->
-          <span class="svg-icon svg-icon-1">
-            <i class="fas fa-bars"></i>
-          </span>
-          <!--end::Svg Icon-->
-        </button>
-        <!--end::Mega Menu Toggler-->
-        <!--begin::Logo-->
-        <a href="#">
-          <h1 class=" logoTitle h-30px logo">Vote.</h1>
-        </a>
-        <!--end::Logo-->
-      </div>
-      <div class="d-flex align-items-center" *ngIf="!isLoggedIn">
-
-        <button class="btn btn-icon login" data-bs-toggle="modal">
-          <a href="/login" routerLink="login"> Login</a>
-        </button>
-      </div>
-
-      <div class="form-check form-switch form-check-custom form-check-solid" *ngIf="isLoggedIn">
-
-        <button class="btn btn-icon marNavLeft" data-bs-toggle="modal">
-          <a href="/profile" class="menu-link" routerLink="profile">{{
-            username
-          }}</a>
-        </button>
-        <button class="btn btn-icon marNavLeft" data-bs-toggle="modal">
-          <a class="logout" (click)="logout()">Sair</a>
-        </button>
-      </div>
+<div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header"
+  data-kt-sticky-offset="{default: '200px', lg: '300px'}">
+  <!--begin::Container-->
+  <div class="container-xxl d-flex align-items-stretch justify-content-between">
+    <!--begin::Left-->
+    <div class="d-flex align-items-center">
+      <!--begin::Mega Menu Toggler-->
+      <button type="button" class="btn btn-icon btn-accent me-2 me-lg-6" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">
+        <!--begin::Svg Icon | path: icons/duotone/Text/Article.svg-->
+        <span class="svg-icon svg-icon-1">
+          <i class="fas fa-bars"></i>
+        </span>
+        <!--end::Svg Icon-->
+      </button>
+      <!--end::Mega Menu Toggler-->
+      <!--begin::Logo-->
+      <a href="#">
+        <h1 class=" logoTitle h-30px logo">Vote.</h1>
+      </a>
+      <!--end::Logo-->
     </div>
-    <!--<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container">
-    <a class="navbar-brand" href="#">
-      <img src="../assets/img/hand_two_fingers (1).svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
-      <b><span class="black">IPCA</span><span class="green">.VOTE</span></b>
-    </a>
-    <!--<a class="navbar-brand" href="#"><b><span class="black">IPCA</span><span class="green">.VOTE</span></b></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item" *ngIf="showAdminBoard">
-          <a class="nav-link"  routerLink="dashboard" href="/dashboard">Admin Dashboard</a>
-        </li>
-        <li class="nav-item" *ngIf="showMesaBoard">
-          <a class="nav-link"  routerLink="mesa" href="/mesa">Dashboard</a>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 " *ngIf="isLoggedIn">
-          <li class="nav-item">
-            <a href="/profile" class="nav-link linkAccount" routerLink="profile">{{ username }}</a>
-          </li>
-          <li class="nav-item">
-            <a href class="nav-link" (click)="logout()">Sair</a>
-          </li>
-        </ul>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="!isLoggedIn">
-          <!--<li class="nav-item">
-            <a href="/register" class="nav-link" routerLink="register">Registar</a>
-          </li>
-          <li class="nav-item">
-            <a href="/login" class="nav-link" routerLink="login">Login</a>
-          </li>
-        </ul>
-        <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button> 
-      </form>
+    <div class="d-flex align-items-center" *ngIf="!isLoggedIn">
+
+      <button class="btn btn-icon login" data-bs-toggle="modal">
+        <a href="/login" routerLink="login"> Login</a>
+      </button>
+    </div>
+
+    <div class="form-check form-switch form-check-custom form-check-solid" *ngIf="isLoggedIn">
+
+      <button class="btn btn-icon marNavLeft" data-bs-toggle="modal">
+        <a href="/profile" class="menu-link" routerLink="profile">{{
+          username
+        }}</a>
+      </button>
+      <button class="btn btn-icon marNavLeft" data-bs-toggle="modal">
+        <a class="logout" (click)="logout()">Sair</a>
+      </button>
     </div>
   </div>
-</nav>
--->
+  <!--end::Right-->
+</div>
+<!--end::Container-->
 
-    <div>
+<div class="d-flex flex-column flex-column-fluid">
+  <div class="content fs-6 d-flex flex-column-fluid">
+    <div class="container-xxl">
       <router-outlet></router-outlet>
-
     </div>
-
   </div>
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
-      <div class="modal-content">
-        <div class="container">
-          <div class="modal-header d-flex flex-stack border-0">
-            <div class="d-flex align-items-center">
-              <a href="/start/index.html">
-                <img alt="Logo" src="../assets/img/logo.svg" class="h-30px" />
-              </a>
-            </div>
-            <div class="btn btn-icon btn-sm btn-light-primary ms-2" data-bs-dismiss="modal">
-              <span class="svg-icon svg-icon-1">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                  height="24px" viewBox="0 0 24 24" version="1.1">
-                  <g transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(4.000000, 4.000000)"
-                    fill="#000000">
-                    <rect fill="#000000" x="0" y="7" width="16" height="2" rx="1"></rect>
-                    <rect fill="#000000" opacity="0.5"
-                      transform="translate(8.000000, 8.000000) rotate(-270.000000) translate(-8.000000, -8.000000)"
-                      x="0" y="7" width="16" height="2" rx="1"></rect>
-                  </g>
-                </svg>
-              </span>
-            </div>
+</div>
+<div class="footer py-4 d-flex flex-lg-column " id="kt_footer">
+  <!--begin::Container-->
+  <div class="container-xxl d-flex flex-column flex-md-row flex-stack">
+    <!--begin::Copyright-->
+    <div class="text-dark order-2 order-md-1">
+      <span class="text-muted fw-bold me-2">2021©</span>
+      <a href="/home" target="_blank" class="text-gray-800 text-hover-primary">Francisco Ferreira</a>
+    </div>
+    <!--end::Copyright-->
+    <!--begin::Menu-->
+    <ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1">
+      <li class="menu-item">
+        <a href="/terms" target="_blank" class="menu-link px-2">Termos e Condições</a>
+      </li>
+      <li class="menu-item">
+        <a href="/about" target="_blank" class="menu-link px-2">Sobre</a>
+      </li>
+      <li class="menu-item">
+        <a href="https://ipca.pt" target="_blank" class="menu-link px-2">IPCA</a>
+      </li>
+      <li class="menu-item">
+        <div class="menu-link px-2  form-check form-switch form-check-custom form-check-solid pulse pulse-primary">
+          <div class=" custom-control custom-switch ml-2 ">
+            <input type="checkbox" class="form-check-input h-20px w-30px" [checked]="darkMode$ | async"
+              (change)="onToggle()" />
+            <label class="custom-control-label " for="customSwitch1">🌛 alpha* </label>
+
           </div>
-          <div class="modal-body">
-            <div class="col-lg-6">
-              <h3 class="fw-bolder mb-8">Menu</h3>
-              <!--begin::Row-->
-              <div class="row g-5">
-                <div class="col-sm-4" *ngIf="showMesaBoard">
-                  <a href="./mesa" class="card bg-light-success hoverable min-h-125px shadow-none mb-5">
-                    <div class="card-body d-flex flex-column flex-center">
-                      <h3 class="fs-3 mb-2 text-dark fw-bolder">Dashboard</h3>
-                    </div>
-                  </a>
-                </div>
-                <div class="col-sm-4">
-                  <a href="https://ipca.pt" class="card bg-light-danger hoverable min-h-125px shadow-none mb-5">
-                    <div class="card-body d-flex flex-column flex-center text-center">
-                      <h3 class="fs-3 mb-2 text-dark fw-bolder">IPCA</h3>
-                    </div>
-                  </a>
-                </div>
+        </div>
+      </li>
+    </ul>
+    <!--end::Menu-->
+  </div>
+  <!--end::Container-->
+</div>
 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="container">
+        <div class="modal-header d-flex flex-stack border-0">
+          <div class="d-flex align-items-center">
+            <a href="/start/index.html">
+              <img alt="Logo" src="../assets/img/logo.svg" class="h-30px" />
+            </a>
+          </div>
+          <div class="btn btn-icon btn-sm btn-light-primary ms-2" data-bs-dismiss="modal">
+            <span class="svg-icon svg-icon-1">
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                height="24px" viewBox="0 0 24 24" version="1.1">
+                <g transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(4.000000, 4.000000)"
+                  fill="#000000">
+                  <rect fill="#000000" x="0" y="7" width="16" height="2" rx="1"></rect>
+                  <rect fill="#000000" opacity="0.5"
+                    transform="translate(8.000000, 8.000000) rotate(-270.000000) translate(-8.000000, -8.000000)"
+                    x="0" y="7" width="16" height="2" rx="1"></rect>
+                </g>
+              </svg>
+            </span>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="col-lg-6">
+            <h3 class="fw-bolder mb-8">Menu</h3>
+            <!--begin::Row-->
+            <div class="row g-5">
+              <div class="col-sm-4" *ngIf="showMesaBoard">
+                <a href="./mesa" class="card bg-light-success hoverable min-h-125px shadow-none mb-5">
+                  <div class="card-body d-flex flex-column flex-center">
+                    <h3 class="fs-3 mb-2 text-dark fw-bolder">Dashboard</h3>
+                  </div>
+                </a>
               </div>
-              <!--end::Row-->
-              <!--begin::Row-->
-              <div class="row g-5">
-                <div class="col-sm-8">
-                  <a href="https://est.ipca.pt/" class="card bg-light-primary hoverable min-h-125px shadow-none mb-5">
-                    <div class="card-body d-flex flex-column flex-center text-center">
-                      <h3 class="fs-3 mb-2 text-dark fw-bolder">Escola Superior De Tecnologia IPCA</h3>
-                    </div>
-                  </a>
-                </div>
+              <div class="col-sm-4">
+                <a href="https://ipca.pt" class="card bg-light-danger hoverable min-h-125px shadow-none mb-5">
+                  <div class="card-body d-flex flex-column flex-center text-center">
+                    <h3 class="fs-3 mb-2 text-dark fw-bolder">IPCA</h3>
+                  </div>
+                </a>
+              </div>
 
-              </div>
-              <div class="row g-5">
-                <div class="col-sm-8" *ngIf="showMesaBoard">
-                  <a href="./register" class="card bg-light-success hoverable min-h-125px shadow-none mb-5">
-                    <div class="card-body d-flex flex-column flex-center">
-                      <h3 class="fs-3 mb-2 text-dark fw-bolder">Registar Diretor de Curso</h3>
-                    </div>
-                  </a>
-                </div>
-              </div>
-              <!--end::Row-->
             </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row g-5">
+              <div class="col-sm-8">
+                <a href="https://est.ipca.pt/" class="card bg-light-primary hoverable min-h-125px shadow-none mb-5">
+                  <div class="card-body d-flex flex-column flex-center text-center">
+                    <h3 class="fs-3 mb-2 text-dark fw-bolder">Escola Superior De Tecnologia IPCA</h3>
+                  </div>
+                </a>
+              </div>
+
+            </div>
+            <div class="row g-5">
+              <div class="col-sm-8" *ngIf="showMesaBoard">
+                <a href="./register" class="card bg-light-success hoverable min-h-125px shadow-none mb-5">
+                  <div class="card-body d-flex flex-column flex-center">
+                    <h3 class="fs-3 mb-2 text-dark fw-bolder">Registar Diretor de Curso</h3>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <!--end::Row-->
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<footer>
-  <div class="footer py-4 d-flex flex-lg-column " id="kt_footer">
-    <!--begin::Container-->
-    <div class="container-xxl d-flex flex-column flex-md-row flex-stack">
-      <!--begin::Copyright-->
-      <div class="text-dark order-2 order-md-1">
-        <span class="text-muted fw-bold me-2">2021©</span>
-        <a href="/home" target="_blank" class="text-gray-800 text-hover-primary">Francisco Ferreira</a>
-      </div>
-      <!--end::Copyright-->
-      <!--begin::Menu-->
-      <ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1">
-        <li class="menu-item">
-          <a href="/terms" target="_blank" class="menu-link px-2">Termos e Condições</a>
-        </li>
-        <li class="menu-item">
-          <a href="/about" target="_blank" class="menu-link px-2">Sobre</a>
-        </li>
-        <li class="menu-item">
-          <a href="https://ipca.pt" target="_blank" class="menu-link px-2">IPCA</a>
-        </li>
-        <li class="menu-item">
-          <div class="menu-link px-2  form-check form-switch form-check-custom form-check-solid pulse pulse-primary">
-            <div class=" custom-control custom-switch ml-2 ">
-              <input type="checkbox" class="form-check-input h-20px w-30px" [checked]="darkMode$ | async"
-                (change)="onToggle()" />
-              <label class="custom-control-label " for="customSwitch1">🌛 alpha* </label>
-
-            </div>
-          </div>
-        </li>
-      </ul>
-      <!--end::Menu-->
-    </div>
-    <!--end::Container-->
-  </div>
-</footer>
